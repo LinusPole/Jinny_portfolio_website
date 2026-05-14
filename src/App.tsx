@@ -1,21 +1,23 @@
-import React, { useState, useEffect, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent, useRef } from 'react';
 import { Menu, X, Check, MapPin, Mail, Zap, Globe, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import emailjs from '@emailjs/browser';
 
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  /**
-   * handleScroll: Manages the navbar appearance based on the vertical scroll position.
-   * This function updates the 'isScrolled' state which triggers a visual change in the nav background.
-   */
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    emailjs.init("loQkpupJya09YdyPh");
   }, []);
 
   /**
@@ -34,14 +36,29 @@ export default function App() {
     setIsMobileMenuOpen(false);
   };
 
-  /**
-   * handleSubmit: Processes the contact form data.
-   * Prevents default page reload and provides feedback to the user upon submission.
-   */
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    alert("Thank you for your message! Jinny will get back to you shortly.");
-  };
+/**
+    * handleSubmit: Processes the contact form data.
+    * Prevents default page reload and sends email via EmailJS.
+    */
+   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+     e.preventDefault();
+     
+     if (!formRef.current) return;
+     
+     const serviceID = "service_jinny";
+     const templateID = "template_q01x8co";
+     
+     emailjs.sendForm(serviceID, templateID, formRef.current)
+       .then((response) => {
+         console.log("SUCCESS!", response.status, response.text);
+         alert("Thank you for your message! Jinny will get back to you shortly.");
+         formRef.current?.reset();
+       })
+       .catch((error) => {
+         console.error("FAILED...", error);
+         alert("Oops! Something went wrong. Please try again later.");
+       });
+   };
 
   return (
     <div className="font-sans text-text-dark bg-bg-white overflow-x-hidden">
@@ -491,23 +508,24 @@ export default function App() {
               </div>
             </div>
 
-            <div className="bg-white p-10 rounded-xl shadow-2xl text-text-dark">
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                <h3 className="text-2xl font-serif font-bold">Send a Message</h3>
-                <input type="text" placeholder="Your Name" className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-primary outline-none" required />
-                <input type="email" placeholder="Your Email" className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-primary outline-none" required />
-                <select defaultValue="" className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-primary outline-none bg-white">
-                  <option value="" disabled>Select Service Type</option>
-                  <option value="essay">Essay/Paper Writing</option>
-                  <option value="stem">STEM & Health Sciences</option>
-                  <option value="psych">Psychology Samples</option>
-                  <option value="business">Business & Management</option>
-                  <option value="online">Full Online Class</option>
-                </select>
-                <textarea rows={4} placeholder="Tell me about your project..." className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-primary outline-none" required></textarea>
-                <button type="submit" className="btn btn-primary w-full py-4 text-lg">Send Message</button>
-              </form>
-            </div>
+<div className="bg-white p-10 rounded-xl shadow-2xl text-text-dark">
+               <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-5">
+                 <h3 className="text-2xl font-serif font-bold">Send a Message</h3>
+                 <input type="text" name="user_name" placeholder="Your Name" className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-primary outline-none" required />
+                 <input type="email" name="user_email" placeholder="Your Email" className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-primary outline-none" required />
+                 <select name="service" defaultValue="" className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-primary outline-none bg-white">
+                   <option value="" disabled>Select Service Type</option>
+                   <option value="Essay/Paper Writing">Essay/Paper Writing</option>
+                   <option value="STEM & Health Sciences">STEM & Health Sciences</option>
+                   <option value="Psychology Samples">Psychology Samples</option>
+                   <option value="Business & Management">Business & Management</option>
+                   <option value="Full Online Class">Full Online Class</option>
+                   <option value="Get a Quote">Get a Quote</option>
+                 </select>
+                 <textarea name="message" rows={4} placeholder="Tell me about your project..." className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-primary outline-none" required></textarea>
+                 <button type="submit" className="btn btn-primary w-full py-4 text-lg">Send Message</button>
+               </form>
+             </div>
           </div>
         </div>
       </section>
