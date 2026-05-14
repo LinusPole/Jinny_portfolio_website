@@ -68,13 +68,13 @@ export default function App() {
           <a href="#" className="font-serif text-2xl font-bold text-primary">J.M.</a>
           
           <ul className="hidden md:flex gap-10">
-            {['Home', 'About', 'Services', 'Portfolio', 'Skills', 'Testimonials', 'Contact'].map((item) => (
-              <li key={item}>
-                <a href={`#${item.toLowerCase()}`} className="font-medium hover:text-primary transition-all relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:height-[2px] after:bg-primary after:transition-all hover:after:w-full py-2">
-                  {item}
-                </a>
-              </li>
-            ))}
+{['Home', 'About', 'Services', 'Academics', 'Portfolio', 'Skills', 'Testimonials', 'Contact'].map((item) => (
+               <li key={item}>
+                 <a href={`#${item.toLowerCase()}`} className="font-medium hover:text-primary transition-all relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:height-[2px] after:bg-primary after:transition-all hover:after:w-full py-2">
+                   {item}
+                 </a>
+               </li>
+             ))}
           </ul>
 
           <div className="md:hidden cursor-pointer flex flex-col gap-1" onClick={toggleMobileMenu}>
@@ -91,11 +91,11 @@ export default function App() {
               exit={{ x: '100%' }}
               className="fixed top-20 left-0 w-full bg-white h-screen z-50 p-10 flex flex-col gap-6 text-center text-xl font-medium shadow-lg"
             >
-              {['Home', 'About', 'Services', 'Portfolio', 'Skills', 'Testimonials', 'Contact'].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} onClick={handleNavLinkClick} className="hover:text-primary transition-colors">
-                  {item}
-                </a>
-              ))}
+{['Home', 'About', 'Services', 'Academics', 'Portfolio', 'Skills', 'Testimonials', 'Contact'].map((item) => (
+                 <a key={item} href={`#${item.toLowerCase()}`} onClick={handleNavLinkClick} className="hover:text-primary transition-colors">
+                   {item}
+                 </a>
+               ))}
             </motion.div>
           )}
         </AnimatePresence>
@@ -353,6 +353,55 @@ export default function App() {
         </div>
       </section>
 
+      {/* Academics Section */}
+      <section id="academics" className="section-padding bg-bg-light">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="section-tag">Academic Work Samples</span>
+            <h2 className="section-title text-4xl font-serif mt-2">Demonstrated Academic Excellence</h2>
+            <p className="section-subtitle mt-4">Samples of work completed for clients seeking degree assistance</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Bachelor's Level Samples */}
+            <div className="bg-white border border-border rounded-xl p-8 hover:shadow-xl transition-shadow flex flex-col h-full">
+              <div className="text-4xl mb-4">📄</div>
+              <h3 className="text-xl font-serif font-bold mb-3">Bachelor's Level Work</h3>
+              <p className="text-text-light text-center flex-grow">
+                Samples of essays, research papers, and assignments completed for Bachelor's degree clients
+              </p>
+              <div className="mt-6">
+                <a href="#" className="btn btn-outline">View Samples</a>
+              </div>
+            </div>
+
+            {/* Master's Level Samples */}
+            <div className="bg-white border border-border rounded-xl p-8 hover:shadow-xl transition-shadow flex flex-col h-full">
+              <div className="text-4xl mb-4">📊</div>
+              <h3 className="text-xl font-serif font-bold mb-3">Master's Level Work</h3>
+              <p className="text-text-light text-center flex-grow">
+                Samples of thesis chapters, literature reviews, and advanced projects for Master's degree clients
+              </p>
+              <div className="mt-6">
+                <a href="#" className="btn btn-outline">View Samples</a>
+              </div>
+            </div>
+
+            {/* PhD Level Samples */}
+            <div className="bg-white border border-border rounded-xl p-8 hover:shadow-xl transition-shadow flex flex-col h-full">
+              <div className="text-4xl mb-4">🔬</div>
+              <h3 className="text-xl font-serif font-bold mb-3">PhD Level Work</h3>
+              <p className="text-text-light text-center flex-grow">
+                Samples of dissertation sections, research proposals, and academic publications for PhD candidates
+              </p>
+              <div className="mt-6">
+                <a href="#" className="btn btn-outline">View Samples</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Skills Section */}
       <section id="skills" className="section-padding">
         <div className="container mx-auto px-6">
@@ -540,13 +589,14 @@ export default function App() {
              <a href="https://tiktok.com/@jinnyhomeworkgirly" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-white transition-colors text-sm">TikTok</a>
              <a href="mailto:toptutor809@gmail.com" className="text-text-muted hover:text-white transition-colors text-sm">Email</a>
            </div>
-            <div className="flex justify-center gap-8 mb-8 border-b border-white/10 pb-8">
-              <a href="#home" className="hover:text-white transition-colors">Home</a>
-              <a href="#about" className="hover:text-white transition-colors">About</a>
-              <a href="#services" className="hover:text-white transition-colors">Services</a>
-              <a href="#testimonials" className="hover:text-white transition-colors">Testimonials</a>
-              <a href="#portfolio" className="hover:text-white transition-colors">Portfolio</a>
-            </div>
+<div className="flex justify-center gap-8 mb-8 border-b border-white/10 pb-8">
+               <a href="#home" className="hover:text-white transition-colors">Home</a>
+               <a href="#about" className="hover:text-white transition-colors">About</a>
+               <a href="#academics" className="hover:text-white transition-colors">Academics</a>
+               <a href="#services" className="hover:text-white transition-colors">Services</a>
+               <a href="#testimonials" className="hover:text-white transition-colors">Testimonials</a>
+               <a href="#portfolio" className="hover:text-white transition-colors">Portfolio</a>
+             </div>
            <p className="text-sm text-text-muted">&copy; 2026 Jinny Your Homework Girly. All rights reserved.</p>
          </div>
        </footer>
