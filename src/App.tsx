@@ -450,65 +450,59 @@ export default function App() {
         </div>
        </section>
 
-       {/* Testimonials Section */}
-       <section id="testimonials" className="section-padding bg-bg-light">
-         <div className="container mx-auto px-6">
-           <div className="text-center mb-16">
-             <span className="section-tag">Testimonials</span>
-             <h2 className="section-title text-4xl font-serif mt-2">What Clients Say</h2>
-           </div>
+        {/* Testimonials Section */}
+        <section id="testimonials" className="section-padding bg-bg-light">
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-16">
+              <span className="section-tag">Testimonials</span>
+              <h2 className="section-title text-4xl font-serif mt-2">What Clients Say</h2>
+            </div>
 
-           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-             <div className="bg-white border border-border rounded-xl p-8 hover:shadow-xl transition-shadow flex flex-col">
-               <div className="text-xl mb-4">★★★★★</div>
-               <p className="text-text-light mb-6 flex-grow">
-                 "Jinny saved my semester! I was falling behind in my online statistics class and she stepped in and got me an A. Professional, fast, and the work was perfect. Highly recommend!"
-               </p>
-               <div className="flex items-center gap-3">
-                 <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                   <span className="text-primary font-semibold">S</span>
-                 </div>
-                 <div>
-                   <h4 className="font-bold">Sarah K.</h4>
-                   <span className="text-sm text-text-light">Statistics Student</span>
-                 </div>
-               </div>
-             </div>
-
-             <div className="bg-white border border-border rounded-xl p-8 hover:shadow-xl transition-shadow flex flex-col">
-               <div className="text-xl mb-4">★★★★★</div>
-               <p className="text-text-light mb-6 flex-grow">
-                 "I used Jinny for my entire nursing program. She handled my pathophysiology and health assessment classes flawlessly. Because of her help, I graduated with honors. Truly a lifesaver!"
-               </p>
-               <div className="flex items-center gap-3">
-                 <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                   <span className="text-primary font-semibold">M</span>
-                 </div>
-                 <div>
-                   <h4 className="font-bold">Marcus T.</h4>
-                   <span className="text-sm text-text-light">RN Graduate</span>
-                 </div>
-               </div>
-             </div>
-
-             <div className="bg-white border border-border rounded-xl p-8 hover:shadow-xl transition-shadow flex flex-col">
-               <div className="text-xl mb-4">★★★★★</div>
-               <p className="text-text-light mb-6 flex-grow">
-                 "Working full-time while taking classes was impossible until I found Jennifer. She completed my entire Sophia Learning requirements in record time. Worth every penny!"
-               </p>
-               <div className="flex items-center gap-3">
-                 <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                   <span className="text-primary font-semibold">J</span>
-                 </div>
-                 <div>
-                   <h4 className="font-bold">Jessica L.</h4>
-                   <span className="text-sm text-text-light">Business Major</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </section>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[  
+                {
+                  id: 1,
+                  name: "Sarah K.",
+                  role: "Statistics Student",
+                  image: "https://i.pravatar.cc/150?img=32",
+                  review: "Jinny saved my semester! I was falling behind in my online statistics class and she stepped in and got me an A. Professional, fast, and the work was perfect. Highly recommend!"
+                },
+                {
+                  id: 2,
+                  name: "Marcus T.",
+                  role: "RN Graduate",
+                  image: "https://i.pravatar.cc/150?img=12",
+                  review: "I used Jinny for my entire nursing program. She handled my pathophysiology and health assessment classes flawlessly. Because of her help, I graduated with honors. Truly a lifesaver!"
+                },
+                {
+                  id: 3,
+                  name: "Jessica L.",
+                  role: "Business Major",
+                  image: "https://i.pravatar.cc/150?img=47",
+                  review: "Working full-time while taking classes was impossible until I found Jennifer. She completed my entire Sophia Learning requirements in record time. Worth every penny!"
+                }
+              ].map((item) => (
+                <div key={item.id} className="bg-white border border-border rounded-xl p-8 hover:shadow-xl transition-shadow flex flex-col">
+                  <div className="text-xl mb-4">★★★★★</div>
+                  <p className="text-text-light mb-6 flex-grow">
+                    {item.review}
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-14 h-14 rounded-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                    <div>
+                      <h4 className="font-bold">{item.name}</h4>
+                      <span className="text-sm text-text-light">{item.role}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
        {/* Contact Section */}
       <section id="contact" className="section-padding bg-bg-dark text-white">
